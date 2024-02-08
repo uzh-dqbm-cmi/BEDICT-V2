@@ -19,6 +19,7 @@ conda activate bedict_2
 
 pip install -r requirements.txt
 
+```bash
 
 ### Try the model on your own sequence
 
