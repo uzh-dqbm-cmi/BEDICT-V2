@@ -31,7 +31,7 @@ BEDICT-V2 is a deep learning model designed to predict base editing outcomes usi
 
 Create a virtual environment and install the required dependencies using [Conda](https://docs.conda.io/en/latest/):
 
-```bash
+ `
 # Create a virtual environment
 conda create --name bedict_v2
 
@@ -40,9 +40,10 @@ conda activate bedict_v2
 
 # Install dependencies
 pip install -r requirements.txt
-'''
 
+` 
 
+In the above example, the first three backticks start the code block, and the closing three backticks indicate the end of the code block. The text after the closing backticks is back to normal text.
 ## Usage
 
 ### Try the Model on Your Own Sequence
