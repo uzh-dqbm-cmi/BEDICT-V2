@@ -1,6 +1,7 @@
 
 # BEDICT-V2
 ![Logo](./web_application/static/logo.png)
+<img src="./web_application/static/logo.png" alt="Logo" width="200"/>
 =======
 
 
