@@ -26,6 +26,41 @@ BEDICT-V2 is a deep learning model designed to predict base editing outcomes usi
 - [License](#license)
 
 ---
+## The folder structure:
+project-root/
+│
+├── web_application/
+│ ├── static/
+│ │ ├── logo.png
+│ │ └── javascriptExtracted.js
+│ │ └── ....
+│ │ 
+│ ├── templates/
+│ │ ├── index.html
+│ │ └── other_templates/
+│ ├── src/
+│ │ ├── main.py
+│ │ └── other_source_files/
+│ └── tests/
+│ ├── test_module1.py
+│ └── test_module2.py
+│
+├── data/
+│ ├── input_data/
+│ └── output_data/
+│
+├── notebooks/
+│ ├── exploratory_analysis.ipynb
+│ └── other_notebooks/
+│
+├── documentation/
+│ ├── user_guide.md
+│ └── developer_guide.md
+│
+├── requirements.txt
+├── LICENSE
+├── README.md
+└── other_project_files/
 
 ## Environment Setup
 
@@ -56,7 +91,7 @@ To use the pre-trained model on your own DNA sequence, follow these steps:
    Make sure you have the required dependencies installed. If you haven't done so, refer to the [Environment Setup](#environme:wq!nt-setup) section.
 
 2. **Load the Model:**
-   In your Python script or notebook, load the pre-trained BEDICT-V2 model:
+   Download the pretrained model and place it in the right folder
 
    ```python
    from bedict_v2 import BedictModel
