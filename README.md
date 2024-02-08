@@ -27,40 +27,24 @@ BEDICT-V2 is a deep learning model designed to predict base editing outcomes usi
 
 ---
 ## The folder structure:
-project-root/
-│
-├── web_application/
-│ ├── static/
-│ │ ├── logo.png
-│ │ └── javascriptExtracted.js
-│ │ └── ....
-│ │ 
-│ ├── templates/
-│ │ ├── index.html
-│ │ └── other_templates/
-│ ├── src/
-│ │ ├── main.py
-│ │ └── other_source_files/
-│ └── tests/
-│ ├── test_module1.py
-│ └── test_module2.py
-│
-├── data/
-│ ├── input_data/
-│ └── output_data/
-│
-├── notebooks/
-│ ├── exploratory_analysis.ipynb
-│ └── other_notebooks/
-│
-├── documentation/
-│ ├── user_guide.md
-│ └── developer_guide.md
-│
-├── requirements.txt
-├── LICENSE
-├── README.md
-└── other_project_files/
+├── src
+│   ├── controller
+│   │   ├── **/*.css
+│   ├── views
+│   ├── model
+│   ├── index.js
+├── public
+│   ├── css
+│   │   ├── **/*.css
+│   ├── images
+│   ├── js
+│   ├── index.html
+├── dist 
+├── node_modules
+├── package.json
+├── package-lock.json
+└── .gitignore
+
 
 ## Environment Setup
 
