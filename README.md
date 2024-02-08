@@ -1,5 +1,6 @@
 
 # BEDICT-V2
+![Logo](./web_application/static/logo.png)
 =======
 
 
