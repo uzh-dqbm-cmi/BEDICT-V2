@@ -1,5 +1,5 @@
 
-# BEDICT-V2:Predicting base editing outcomes with an attention-based deep learning algorithm# BEDICT-V2: Predicting Base Editing Outcomes with an Attention-Based Deep Learning Algorithm
+# BEDICT-V2:Predicting base editing outcomes with an attention-based deep learning algorithm
 
 <p align="center">
   <img src="./web_application/static/logo.png" alt="Logo" width="400"/>
