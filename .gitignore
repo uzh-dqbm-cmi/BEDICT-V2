@@ -1,0 +1,13 @@
+# Ignore build directories
+
+dataset/
+/absolute_efficiency_model/output/
+/proportion_model/output/
+/test_results
+
+#Ignore files 
+run_code.txt 
+
+# Ignore everything in the 'example' directory
+notebooks/*
+!notebooks/overall_probability.ipynb 

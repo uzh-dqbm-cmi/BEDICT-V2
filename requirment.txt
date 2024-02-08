@@ -1,0 +1,21 @@
+# create an environment
+conda create --name bedict_2
+# activate the created environment (bedict_crispr)
+conda activate bedict_2
+# install anaconda
+conda install -c anaconda python=3.7
+conda update -y --all
+conda install pytorch torchvision cudatoolkit=10.1 -c pytorch
+conda clean -ya
+conda update python
+pip install metadata
+pip install flask
+pip install pandas
+pip install matplotlib
+pip install tqdm
+pip install scipy
+pip install prettytable
+pip install scikit-learn
+pip install seaborn
+pip install jupyter notebook
+
