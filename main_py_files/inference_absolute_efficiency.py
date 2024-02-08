@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import torch
 import argparse
+from configparser import ConfigParser
 working_path = '../absolute_efficiency_model'
 import sys
 sys.path.append(working_path)
@@ -32,6 +33,8 @@ cmd_opt.add_argument('-working_dir',  type=str, default='./', help = 'the main w
 #cmd_opt.add_argument('-output_path', type=str, help='path to save the trained model')
 #cmd_opt.add_argument('-model_path', type=str, help='path to trained model')
 cmd_opt.add_argument('-random_seed', type=int,default=42)
+cmd_opt.add_argument('-config_file', type=str, default='config_file.ini', help='')
+#cmd_opt.add_argument('-config_file', type=str, default='config.ini', help='Path to the configuration file')
 #cmd_opt.add_argument('-epoch_num', type=int, default =200, help='number of training epochs')
 args, _ = cmd_opt.parse_known_args()
 #data_invivo = args.data_invivo
@@ -39,10 +42,32 @@ args, _ = cmd_opt.parse_known_args()
 
 
 
+
 def main_inference(args):
-    
-    #args.data_invivo = False
-    #args.model_invivo = False
+    config = ConfigParser()
+    config.read(args.config_file)
+
+    if 'Inference_absolute_efficiency' in config:
+        params = config['Inference_absolute_efficiency']
+        
+        args.data_invivo = config.getboolean('Inference_absolute_efficiency', 'data_invivo')
+        args.model_invivo = config.getboolean('Inference_absolute_efficiency', 'model_invivo')
+        args.transfer_learning = config.getboolean('Inference_absolute_efficiency', 'transfer_learning')
+        args.saved_model = params['saved_model']
+        args.model_cell_name = params['model_cell_name']
+        args.data_cell_name = params['data_cell_name']
+        args.data_name = params['data_name']
+
+        print('we are printing out args', args)
+
+        transfer_learning = args.transfer_learning
+        print('is it transfer learning:', transfer_learning)
+
+        # Rest of the code...
+
+    else:
+        raise ValueError("The 'InferenceConfig' section is missing in the configuration file.")
+
     
     '''
     if args.model_invivo == args.data_invivo:
@@ -164,13 +189,8 @@ def main_inference(args):
             return res_desc
         
         
-
-args.data_invivo = False
-args.model_invivo = False 
-args.saved_model = 'ABEmax-SpRY'
-args.model_cell_name = ''
-args.data_cell_name = ''
-args.data_name = 'ABEmax-SpRY'
-args.transfer_learning = False
-res_desc = main_inference(args)
-print(res_desc)
+if __name__ == "__main__":
+    args, _ = cmd_opt.parse_known_args()
+    res_desc = main_inference(args)
+    print(res_desc)
+    

@@ -176,7 +176,7 @@ print(absolute_dir)
 
 if not in_vivo:
     #for data_name in ['ABEmax-SpRY', 'ABEmax-SpCas9', 'ABEmax-NG', 'ABE8e-NG', 'ABE8e-SpRY', 'ABE8e-SpCas9']:
-    for data_name in ['ABEmax-SpRY']:
+    for data_name in ['ABE8e-NG']:
         main_train(data_name, screen_name, in_vivo, args)
 
 

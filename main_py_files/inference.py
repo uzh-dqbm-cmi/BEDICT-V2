@@ -1,20 +1,20 @@
 import subprocess
 
-def run_inference_script(script_path):
+def run_inference_script(script_path, config_file):
     try:
-        print(f"Running script: {script_path}")
-        subprocess.run(["python", script_path], check=True)
+        command = ["python", script_path, config_file]  # Remove '-config_file'
+        print(f"Running command: {' '.join(command)}")
+        subprocess.run(command, check=True)
         print(f"Script {script_path} completed successfully.")
     except subprocess.CalledProcessError as e:
         print(f"Error running {script_path}: {e}")
 
 # Specify the paths to your inference scripts
 inference_scripts = [
-    "./inference_absolute_efficiency.py",
-    "./inference_proportion.py",
-    "./overall_outcome_inference.py"
+    {"script": "inference_absolute_efficiency.py", "config": "config_absolute_efficiency.ini"},
+    # Add more scripts if needed
 ]
 
 # Run scripts sequentially
-for script in inference_scripts:
-    run_inference_script(script)
+for script_info in inference_scripts:
+    run_inference_script(script_info["script"], script_info["config"])
