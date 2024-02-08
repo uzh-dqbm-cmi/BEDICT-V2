@@ -29,22 +29,28 @@ BEDICT-V2 is a deep learning model designed to predict base editing outcomes usi
 ## The folder structure:
 ```
 packages/button
-├── lib
-│   ├── button.d.ts
-│   ├── button.js
-│   ├── button.js.map
-│   ├── button.stories.d.ts
-│   ├── button.stories.js
-│   ├── button.stories.js.map
-│   ├── index.d.ts
-│   ├── index.js
-│   └── index.js.map
-├── package.json
-├── src
-│   ├── button.stories.tsx
-│   ├── button.tsx
-│   └── index.ts
-└── tsconfig.json
+├── absolute_efficiency_model
+│   ├── models
+│   ├── output
+│   └── src
+├── dataset
+├── main_py_files
+│   ├── train.py
+│   ├── ....
+│   └──inference.py
+├── dataset
+├── notebooks
+
+├── proportion_model
+│   ├── output
+│   └── src
+├── utils
+├── web_application
+│   ├── templates
+│   ├── static
+│   └── app.y
+├── README.md
+└── requirment.txt
 ```
 
 ## Environment Setup
