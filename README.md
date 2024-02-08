@@ -41,3 +41,19 @@ conda activate bedict_v2
 # Install dependencies
 pip install -r requirements.txt
 
+## Usage
+
+### Try the Model on Your Own Sequence
+
+To use the pre-trained model on your own DNA sequence, follow these steps:
+
+1. **Install Dependencies:**
+   Make sure you have the required dependencies installed. If you haven't done so, refer to the [Environment Setup](#environment-setup) section.
+
+2. **Load the Model:**
+   In your Python script or notebook, load the pre-trained BEDICT-V2 model:
+
+   ```python
+   from bedict_v2 import BedictModel
+
+   model = BedictModel()
