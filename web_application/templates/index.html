@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEDICT-V2.0</title>
+
+    <style>
+        /* Your existing styles (unchanged) */
+
+        /* New style for the selected button */
+        #predictionTypeButtons button.selected,
+        #inVitroEditorButtons button.selected,
+        #cell_line_buttons button.selected,
+        #inVivoEditorButtonsContainer button.selected,
+        #inVivoEditorButtons button.selected {
+            background-color: #3498db;
+        }
+
+        body {
+            text-align: left; /* Center-align the content */
+        }
+        #predictionTypeButtons {
+            text-align: left; /* Align child elements to the left within the div */
+        }
+
+        /* Style for hiding/showing elements based on prediction type */
+        .hidden {
+            display: none;
+        }
+
+        #logo-container {
+            margin-top: 20px; /* Add margin to position the logo below the top */
+            margin-bottom: 20px; /* Add margin after the logo */
+            text-align: center; /* Center-align content within the container */
+        }
+
+        img {
+            width: 300px;
+            height: 150px;
+        }
+
+        
+
+        #main-text-image {
+            position: relative;
+            margin-bottom: 20px; /* Add margin after the main text image */
+        }
+        #main-text-image img {
+            width: 100%; /* Make the image take up the full width of its container */
+            height: auto; /* Maintain the aspect ratio */
+        }
+        
+
+        .line {
+            position: absolute;
+            height: 2px; /* Set the height of the line */
+            background-color: black;
+            left: 0;
+            right: 0;
+        }
+
+        .line.top {
+            top: 0;
+        }
+
+        .line.bottom {
+            bottom: 0;
+        }
+
+        #sub-networks {
+            display: flex; /* Use flexbox for horizontal alignment */
+            justify-content: flex-start; /* Align to the left */
+            margin-bottom: 10px; /* Add margin after the headings */
+        }
+
+        h2 {
+            margin: 10px; /* Add margin around h2 elements */
+        }
+        .form-text {
+        font-size: 1.2em;
+        }
+        
+
+    </style>
+</head>
+
+<body>
+    <div id="logo-container">
+        <img src="/static/logo.png" alt="Your Logo">
+    </div>
+    
+    <!-- Headings for sub-networks displayed horizontally -->
+    <div id="sub-networks">
+        <a href="/"><h2>Main</h2></a>
+        <a href="/help"><h2>Help</h2></a>
+        <a href="https://github.com/uzh-dqbm-cmi/BEDICT-V2" target="_blank"><h2>Code</h2></a>
+        <a href="/about"><h2>About</h2></a>
+    </div>
+    
+    
+    <!-- Your main text image -->
+    <div id="main-text-image">
+        <div class="line top"></div>
+        <img src="/static/main_text.png" alt="Main Text">
+        <div class="line bottom"></div>
+    </div>
+
+    
+
+    <script>
+        function submitForm() {
+            var input1 = document.getElementById("input1").value;
+            var input2 = document.getElementById("input2").value;
+
+            // Send the inputs to the backend using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            
+            // Define the callback function to handle the response
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    alert("Result: " + response.result);
+                }
+            };
+
+            xhr.send(JSON.stringify({ input1: parseInt(input1), input2: parseInt(input2) }));
+        }
+    </script>
+
+    <!--
+    <form id="inputForm">
+        <label for="input1">Editingt starts at postion:</label>
+        <input type="number" id="input1" required>
+
+        <label for="input2">Editing ends at position:</label>
+        <input type="number" id="input2" required>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+    -->
+    <h2 style="font-size: 1.2em;">Choose your application:<h2>
+    <div id="predictionTypeButtons">
+        <button type="button" onclick="selectPredictionType('InVitro')">In Vitro</button>
+        <button type="button" onclick="selectPredictionType('InVivo')">In Vivo</button>
+    </div>
+    
+    
+
+
+    <form id="sequenceForm">
+        <!-- In Vitro Prediction Section -->
+        <div id="inVitroSection" class="hidden">
+            <label class="form-text">Choose an editor (In Vitro):</label>
+                <div id="inVitroEditorButtons">
+                    <button type="button" onclick="selectEditor('ABE8e-SpCas9', 'InVitro')">ABE8e-SpCas9</button>
+                    <button type="button" onclick="selectEditor('ABE8e-NG', 'InVitro')">ABE8e-NG</button>
+                    <button type="button" onclick="selectEditor('ABE8e-SpRY', 'InVitro')">ABE8e-SpRY</button>
+                    <button type="button" onclick="selectEditor('ABEmax-SpCas9', 'InVitro')">ABEmax-SpCas9</button>
+                    <button type="button" onclick="selectEditor('ABEmax-NG', 'InVitro')">ABEmax-NG</button>
+                    <button type="button" onclick="selectEditor('ABEmax-SpRY', 'InVitro')">ABEmax-SpRY</button>
+                    <!-- Add more buttons if needed -->
+                </div>
+            </label>
+            <br>
+            <label for="inVitroSequenceInput">Enter DNA Sequence (24 bases):</label>
+            <textarea id="inVitroSequenceInput" rows="4" cols="50"></textarea>
+        </div>
+
+        <!-- In Vivo Prediction Section -->
+        <div id="inVivoSection" class="hidden">
+            <label class="form-text">Choose the cell line (In Vivo):</label>
+                <div id="cell_line_buttons">
+                    <button type="button" onclick="selectCellLine('Liver_LentiAAV')">Liver_LentiAAV</button>
+                    <button type="button" onclick="selectCellLine('Liver_LentiLNP')">Liver_LentiLNP</button>
+                    <button type="button" onclick="selectCellLine('Liver_SBApproach')">Liver_SBApproach</button>
+                    <!-- Add more checkboxes if needed -->
+                </div>
+            </label>
+            <label class="form-text">Choose an Editor (In Vivo):</label>
+            <div id="inVivoEditorButtonsContainer" class="hidden">
+                <label> Choose an editor (In Vivo):
+                    <div id="inVivoEditorButtons">
+
+                    </div>
+                </label>
+            </div>
+
+            <br>
+            <label for="inVivoSequenceInput" class="form-text;">Enter DNA Sequence (24 bases):</label>
+            <br> <!-- Add a line break here -->
+            <textarea id="inVivoSequenceInput" rows="4" cols="50"></textarea>
+        </div>
+
+        
+        <br>
+        <button type="button" onclick="predict()">Predict</button>
+    </form>
+
+    <h2>Prediction Results</h2>
+    <!-- <div id="predictionResults"></div> -->
+    <div id="predictionResults">
+        {{ res_html | safe }}
+    </div>
+    <script src="{{url_for('static', filename='javascriptExtracted.js')}}"></script>
+</body>
+
+</html>
