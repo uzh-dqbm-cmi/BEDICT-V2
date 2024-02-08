@@ -10,7 +10,9 @@
 ## Overview
 
 BEDICT-V2 is a deep learning model designed to predict base editing outcomes using an attention-based algorithm. This repository provides the source code and instructions for using the model.
-
+<p align="center">
+  <img src="./web_application/static/model.png" alt="Logo" width="800"/>
+</p>
 ---
 
 ## Table of Contents
