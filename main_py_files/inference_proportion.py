@@ -25,7 +25,34 @@ cmd_opt.add_argument('-data_name',  type=str,default = '', help = 'directory of 
 cmd_opt.add_argument('-saved_model',  type=str,default = '', help = 'name of the model used for inference')
 args, _ = cmd_opt.parse_known_args()
 
+
 def proportion_inference(args):
+
+
+    config = ConfigParser()
+    config.read(args.config_file)
+
+    if 'Inference_proportiona_model' in config:
+        params = config['Inference_proportiona_model']
+        
+        args.data_invivo = config.getboolean('Inference_proportiona_model', 'data_invivo')
+        args.model_invivo = config.getboolean('Inference_proportiona_model', 'model_invivo')
+        args.transfer_learning = config.getboolean('Inference_proportiona_model', 'transfer_learning')
+        args.model_cell_name = params['model_cell_name']
+        args.model_cell_name = params['model_cell_name']
+        args.data_cell_name = params['data_cell_name']
+        args.data_name = params['data_name']
+
+        print('we are printing out args', args)
+
+        transfer_learning = args.transfer_learning
+        print('is it transfer learning:', transfer_learning)
+
+        # Rest of the code...
+
+    else:
+        raise ValueError("The 'InferenceConfig' section is missing in the configuration file.")
+
     
     #args.data_invivo = False
     #args.model_invivo = False
@@ -197,11 +224,10 @@ def proportion_inference(args):
     print("*"*25)
     print(test_peformance)
 
-args.data_invivo = False
-args.model_invivo = False
-args.saved_model = 'ABEmax-SpRY'
-args.model_cell_name = ''
-args.data_cell_name = ''
-args.data_name = 'ABEmax-SpRY'
-args.transfer_learning = False
-proportion_inference(args)
+
+
+if __name__ == "__main__":
+    args, _ = cmd_opt.parse_known_args()
+    proportion_inference(args)
+   
+    
