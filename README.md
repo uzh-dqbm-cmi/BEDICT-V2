@@ -80,12 +80,11 @@ To use the pre-trained model on your own DNA sequence, follow these steps:
 1. **Install Dependencies:**
    Make sure you have the required dependencies installed. If you haven't done so, refer to the [Environment Setup](#environme:wq!nt-setup) section.
 
-2. **Load the Model:**
+2. **Get the trained model**
    Download the pretrained model and place it in the right folder
 
-   ```python
-   from bedict_v2 import BedictModel
+3.  **Do inference**
 
-   model = BedictModel()
-
-3. do sth
+Go to the foler main_py_files and call inference.py file, before that, you can select the method (in vivo or in vitro), editor in the config file and run inference.py
+```bash
+python inference.py
