@@ -88,3 +88,25 @@ To use the pre-trained model on your own DNA sequence, follow these steps:
 Go to the foler main_py_files and call inference.py file, before that, you can select the method (in vivo or in vitro), editor in the config file and run inference.py
 ```bash
 python inference.py
+```
+
+### Train the model on your own dataset
+
+To deploy our model on your dataset, where you will train our model on your screening data, follow these steps:
+
+1. **Prepare the data:**
+
+There is an example data you will find in the dataset store in exel file, where it includes columsn with target protospacer (20 bases), pam information (four bases), and outcome sequence (20 bases)
+
+2.  **Pre-process the data:**
+
+Go to the foler main_py_files and run generate_two_stage_model_data, input the exel file name
+
+```bash
+python inference.py
+```
+
+2.  **Train the model:**
+
+
+2.  **Infer the model:**
