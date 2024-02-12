@@ -54,7 +54,7 @@ packages/button
 
 ## Environment Setup
 
-### Step 1: Create a Virtual Environment
+### Set up the environment
 
 Create a virtual environment and install the required dependencies using [Conda](https://docs.conda.io/en/latest/):
 
