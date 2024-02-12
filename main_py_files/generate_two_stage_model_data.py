@@ -180,13 +180,14 @@ def process_save_data(editor_name,input_type , num_splits, exp_name, invivo ):
     print('finished processing', editor_name, input_type, 'number of partitions', num_splits)
     print('saving in', target_dir )
     
+
+
 ############specify the screening method and editor##########    
 invivo=False
 exp_name = ''
-
-
 if not invivo:
-    for editor_name in ['ABEmax-SpRY','ABEmax-NG','ABEmax-SpCas9', 'ABE8e-NG', 'ABE8e-SpRY','ABE8e-SpCas9' ]:
+    #for editor_name in ['ABEmax-SpRY','ABEmax-NG','ABEmax-SpCas9', 'ABE8e-NG', 'ABE8e-SpRY','ABE8e-SpCas9' ]:
+    for editor_name in ['ABEmax-NG']:
         process_save_data(editor_name,input_type, num_splits,exp_name,invivo)
         
 else:
