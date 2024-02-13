@@ -233,7 +233,7 @@ def TnpB():
     #print('editng start', editing_starts)
     #editing_end = request.json.get('input2')
     #print('editing edns', editing_end)
-    editing_window = [1, 20]
+    editing_window = [5, 15]
     
     editor_name = request.json.get('editor_name')  # Add this line to get the editor name
     #in_vitro = request.json.get('screening_method')
@@ -267,10 +267,7 @@ def TnpB():
     else:
         in_vitro = False
       
-    final_df, df_sorted,res_html = main(df, editor_name, in_vitro, cell_type, editing_window)
-    print('printing html')
-    print(res_html)
-    print('printing html end')
+    final_df, df_sorted, res_html = main(df, editor_name, in_vitro, cell_type, editing_window)
 
 
     predictions_list = []
@@ -283,30 +280,15 @@ def TnpB():
         }
         predictions_list.append(prediction_dict)
         print(prediction_dict)
+    # jsonPredictionList = jsonify(predictions_list)
+    html = res_html
+    returnDict  = {}
+    returnDict['html'] = res_html
+    returnDict['predictionlist'] = predictions_list
 
-    # Create a downloadable Excel file
-    # excel_output = io.BytesIO()
-    # df_sorted.to_excel(excel_output, index=False, sheet_name='predictions')
-    # excel_output.seek(0)
-
-    # # Save the Excel file to the server
-    # excel_file_path = 'predictions.xlsx'
-    # excel_output.seek(0)
-    
-    # with open(excel_file_path, 'wb') as f:
-    #      f.write(excel_output.read())
-
-    # # Return the Excel file as a downloadable attachment
-    # return send_file(
-    #     excel_file_path,
-    #     mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    #     as_attachment=True,
-    #     download_name='predictions.xlsx'
-    # )
-
+    return jsonify(returnDict)
     #return jsonify(predictions_list)
-        return res_html
-    # return render_template("index.html", res_html=res_html)
+        # return res_html
 
 if __name__== "__main__":
     app.run(debug=True, port=8888)

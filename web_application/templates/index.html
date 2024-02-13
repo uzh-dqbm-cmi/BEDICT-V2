@@ -108,41 +108,7 @@
         <div class="line bottom"></div>
     </div>
 
-    
-
-    <script>
-        function submitForm() {
-            var input1 = document.getElementById("input1").value;
-            var input2 = document.getElementById("input2").value;
-
-            // Send the inputs to the backend using AJAX
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            
-            // Define the callback function to handle the response
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    alert("Result: " + response.result);
-                }
-            };
-
-            xhr.send(JSON.stringify({ input1: parseInt(input1), input2: parseInt(input2) }));
-        }
-    </script>
-
-    <!--
-    <form id="inputForm">
-        <label for="input1">Editingt starts at postion:</label>
-        <input type="number" id="input1" required>
-
-        <label for="input2">Editing ends at position:</label>
-        <input type="number" id="input2" required>
-
-        <button type="button" onclick="submitForm()">Submit</button>
-    </form>
-    -->
+ 
     <h2 style="font-size: 1.2em;">Choose your application:<h2>
     <div id="predictionTypeButtons">
         <button type="button" onclick="selectPredictionType('InVitro')">In Vitro</button>
@@ -201,7 +167,7 @@
         <button type="button" onclick="predict()">Predict</button>
     </form>
 
-    <h2>Prediction Results</h2>
+    <h2>Prediction Result (first)</h2>
     <!-- <div id="predictionResults"></div> -->
     <div id="predictionResults">
         {{ res_html | safe }}

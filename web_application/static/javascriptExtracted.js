@@ -26,17 +26,6 @@ function selectPredictionType(predictionType) {
     }
 }
 
-function submitForm() {
-      var input1 = document.getElementById("input1").value;
-      var input2 = document.getElementById("input2").value;
-
-       // Send the inputs to the backend using AJAX (you can use other methods as well)
-       var xhr = new XMLHttpRequest();
-       xhr.open("POST", "/process_inputs", true);
-       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-       xhr.send(JSON.stringify({ input1: parseInt(input1), input2: parseInt(input2) }));
- }
-
 function selectCellLine(cellLine) {
     // Set the selected cell line
     selectedcelltype = cellLine;
@@ -150,10 +139,8 @@ function predict() {
     var predictionType = inVitroSection.classList.contains("hidden") ? "InVivo" : "InVitro";
 
     // Based on the prediction type, get the appropriate sequence, selected editor, and screening methods
-    var sequence, selectedEditor, celltype, input1, input2;
+    var sequence, selectedEditor, celltype;
 
-    input1 = parseInt(document.getElementById("input1").value);
-    input2 = parseInt(document.getElementById("input2").value);
     if (predictionType === 'InVitro') {
         sequence = document.getElementById("inVitroSequenceInput").value;
         selectedEditor = selectedEditorInVitro;
@@ -177,21 +164,32 @@ function predict() {
     xhr.onload = function () {
         if (xhr.status === 200) {
             var predResultElement = document.getElementById("predictionResults");
-            var htmlResponse = xhr.response.replaceAll('\\n','\n');
-            predResultElement.innerHTML = xhr.response;
+            var responseJSON = JSON.parse(xhr.responseText);
+            htmlJSON = responseJSON['html'];
+            var keys = Object.keys(htmlJSON);
+            var htmlToPrint= "";
+            for (var cKey in keys) {
+                htmlToPrint += htmlJSON[keys[cKey]]+"<br>";
+            }
+
+
+
+            // var htmlResponse = xhr.response.replaceAll('\\n','\n');
+            // htmlResponse = htmlResponse.replaceAll('\\"','"');
+
+            predResultElement.innerHTML = htmlToPrint;
 
     //         var results = JSON.parse(xhr.responseText);
-    //         displayResults(results);
+                prepareAndRenderCVSDownload(responseJSON['predictionlist']);
     //         // saveTemplateAsFile("filename.json", myDataObj);
             // $("#predictionResults").html(xhr.result)   
-            alert("received results")
+            // alert("received results")
         } else {
             alert("Error in prediction.");
         }
     };
 
-    xhr.send(JSON.stringify({ "input_data": sequence, "editor_name": selectedEditor, "prediction_type": predictionType, "cell_type": celltype,"input1": input1,
-        "input2": input2 }));
+    xhr.send(JSON.stringify({ "input_data": sequence, "editor_name": selectedEditor, "prediction_type": predictionType, "cell_type": celltype}));
 }
 
 const saveTemplateAsFile = (filename, dataObjToWrite) => {
@@ -241,30 +239,30 @@ function arrayToCsv(data) {
     ).join('\r\n');  // rows starting on new lines
 }
 
-function displayResults(results) {
+function prepareAndRenderCVSDownload(results) {
     var resultsDiv = document.getElementById("predictionResults");
-    resultsDiv.innerHTML = "";
+    // resultsDiv.innerHTML = "";
 
-    var table = document.createElement("table");
-    var headerRow = table.insertRow();
+    // var table = document.createElement("table");
+    // var headerRow = table.insertRow();
     var headers = ["Index", "Target Sequence", "Output Sequence", "Probability"];
 
     var csvArray = Array();
     csvArray.push(headers);
 
-    headers.forEach(function (header) {
-        var cell_line = headerRow.insertCell();
-        cell_line.textContent = header;
-    });
+    // headers.forEach(function (header) {
+        // var cell_line = headerRow.insertCell();
+        // cell_line.textContent = header;
+    // });
     results.forEach(function (entry) {
-        var row = table.insertRow();
+        // var row = table.insertRow();
         var cell_lines = [entry.index, entry.Ref_seq, entry.Output_seq, entry.score.toFixed(3)];
         csvArray.push(cell_lines);
 
-        cell_lines.forEach(function (cell_lineValue) {
-            var cell_line = row.insertCell();
-            cell_line.textContent = cell_lineValue;
-        });
+        // cell_lines.forEach(function (cell_lineValue) {
+            // var cell_line = row.insertCell();
+            // cell_line.textContent = cell_lineValue;
+        // });
     });
 
     var downloadButton = document.createElement("button");
@@ -276,7 +274,7 @@ function displayResults(results) {
         csv = arrayToCsv(csvArray);
         downloadBlob(csv, 'export.csv', 'text/csv;charset=utf-8;')
     };
-    resultsDiv.appendChild(table);
+    // resultsDiv.appendChild(table);
     resultsDiv.appendChild(downloadButton);
 
 }
