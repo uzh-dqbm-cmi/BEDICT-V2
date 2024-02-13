@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 import scipy
 import matplotlib.pyplot as plt
+import argparse
+from configparser import ConfigParser
 import itertools
 woking_path = '../'
 print(woking_path )
@@ -37,6 +39,8 @@ def get_overall_prob(pdf, edf):
 
 def peformance_report(data_name,saved_model, exp_name,num_runs, in_vivo, screen_type, transfer_learning,model_cell_type, data_cell_type):
     model_name = 'CNN'
+    version = 2
+    exp_name = 'protospacer_PAM'
     print('result for',exp_name)
     print(transfer_learning)
     if not transfer_learning:   
@@ -182,60 +186,89 @@ def scatter_plot(df, pred, true, data_name, over_all, in_vivo ,screen_name):
     else: 
         plt.savefig(f'./in_vitro/scatter_plot_{data_name}_{over_all}.svg')
 
-### fixed parameters
-model_name = 'CNN'
-screen_name = ''
-in_vivo = True
-version=2
-num_runs = 3
-exp_name = 'protospacer_PAM'
-
-#if in vitro
-in_vivo = False
-transfer_learning = False
-screen_name = ''
-model_cell_type = ''
-data_cell_type = ''
-data_name = 'ABEmax-SpRY'
-model_name ='ABEmax-SpRY'
-
-final_df, proportion_df,efficiency_df,non_wild_df, wild_df = peformance_report(data_name, data_name, 'protospacer_PAM',num_runs, in_vivo,screen_name,transfer_learning, model_cell_type, data_cell_type)
 
 
-##if in vivo:
-#in_vivo = False
-transfer_learning = True
-screen_name = 'Liver_SBApproach'
-#model_cell_type = 'Liver_LentiAAV'
-#data_cell_type = 'Liver_LentiAAV'
-data_name = 'ABEmax-SPRY'
-model_name ='ABEmax-SPRY'
-model_cell_type = ''
-data_cell_type = 'Liver_SBApproach'
-#final_df, proportion_df,efficiency_df,non_wild_df, wild_df = peformance_report(data_name,model_name, 'protospacer_PAM',num_runs, in_vivo, '', transfer_learning, model_cell_type, data_cell_type)
+cmd_opt = argparse.ArgumentParser(description='Argparser for data')
+cmd_opt.add_argument('-transfer_learning',type=str,default ='',help = ' transfer learning')
+cmd_opt.add_argument('-screen_name',  type=str,default = '', help = '')
+cmd_opt.add_argument('-model_cell_type',type=str,default = '',help = '')
+cmd_opt.add_argument('-data_cell_type',type=str,default = '',help = '')
+cmd_opt.add_argument('-data_name',type=str,default = '',help = '')
+cmd_opt.add_argument('-model_name',type=str,default = '',help = 'model_name')
+cmd_opt.add_argument('-in_vivo',type=str,default ='',help = '')
+cmd_opt.add_argument('-config_file', type=str, default='config_file.ini', help='')
 
 
-if in_vivo:
-    if screen_name == 'Liver_LentiAAV':
-        for data_name in ['ABEmax-SpRY', 'ABE8e-SpRY']:
-            peformance_report(data_name, data_name, 'protospacer_PAM',num_runs, True,screen_name,transfer_learning, model_cell_type, data_cell_type)
-
-    if screen_name == 'Liver_LentiLNP':
-        for data_name in ['ABEmax-SpRY','ABE8e-NG', 'ABE8e-SpRY','ABE8e-SpCas9' ]:
-            peformance_report(data_name, data_name,'protospacer_PAM',num_runs, True,screen_name,transfer_learning,model_cell_type, data_cell_type)
+args, _ = cmd_opt.parse_known_args()
 
 
-    if screen_name == 'Liver_SBApproach':
-        for data_name in ['ABEmax-SpRY' ]:
-            peformance_report(data_name,data_name, 'protospacer_PAM',num_runs, True,screen_name,transfer_learning,model_cell_type, data_cell_type)
+def main(args):
 
+    config = ConfigParser()
+    config.read(args.config_file)
+
+    if 'Inference_overall' in config:
+        params = config['Inference_overall']
         
-else:
-    
-    for data_name in ['ABEmax-SpRY','ABEmax-SpCas9','ABEmax-NG',  'ABE8e-SpRY','ABE8e-SpCas9','ABE8e-NG' ]:
-        peformance_report(data_name,model_name, 'protospacer_PAM',num_runs, False, '', False,model_cell_type, data_cell_type)
- 
+        args.in_vivo = config.getboolean('Inference_overall', 'in_vivo')
+        args.transfer_learning = config.getboolean('Inference_overall', 'transfer_learning')
+        args.screen_name = params['screen_name']
+        args.model_cell_type = params['model_cell_type']
+        args.data_cell_type = params['data_cell_type']
+        args.data_name = params['data_name']
+        args.model_name = params['model_name']
 
-scatter_plot(final_df, 'overall_pred', 'overall_true', data_name, 'all', True,screen_name)
-scatter_plot(wild_df, 'overall_pred', 'overall_true', data_name, 'wild', in_vivo, screen_name)
-scatter_plot(proportion_df, 'true_score', 'pred_score', data_name, 'non-wild_renormalized',in_vivo, screen_name)
+        print('we are printing out args', args)
+
+        transfer_learning = args.transfer_learning
+        print('is it transfer learning:', transfer_learning)
+
+        # Rest of the code...
+
+    else:
+        raise ValueError("The 'InferenceConfig' section is missing in the configuration file.")
+    
+
+
+    ### fixed parameters
+    #model_name = 'CNN'
+    #screen_name = ''
+    #in_vivo = True
+  
+    num_runs = 3
+    in_vivo = args.in_vivo
+    transfer_learning = args.transfer_learning
+    screen_name = args.screen_name
+    model_cell_type = args.model_cell_type
+    data_cell_type = args.data_cell_type
+    data_name = args.data_name
+    model_name =args.model_name
+
+    if not in_vivo:
+        final_df, proportion_df,efficiency_df,non_wild_df, wild_df = peformance_report(data_name, data_name, 'protospacer_PAM',num_runs, in_vivo,screen_name,transfer_learning, model_cell_type, data_cell_type)
+    else:
+        if screen_name == 'Liver_LentiAAV':
+            if data_name in ['ABEmax-SpRY', 'ABE8e-SpRY']:
+                final_df, proportion_df,efficiency_df,non_wild_df, wild_df= peformance_report(data_name, data_name, 'protospacer_PAM',num_runs, True,screen_name,transfer_learning, model_cell_type, data_cell_type)
+
+        if screen_name == 'Liver_LentiLNP':
+            if data_name in ['ABEmax-SpRY','ABE8e-NG', 'ABE8e-SpRY','ABE8e-SpCas9' ]:
+                final_df, proportion_df,efficiency_df,non_wild_df, wild_df= peformance_report(data_name, data_name,'protospacer_PAM',num_runs, True,screen_name,transfer_learning,model_cell_type, data_cell_type)
+
+        if screen_name == 'Liver_SBApproach':
+            if data_name in ['ABEmax-SpRY' ]:
+                final_df, proportion_df,efficiency_df,non_wild_df, wild_df= peformance_report(data_name,data_name, 'protospacer_PAM',num_runs, True,screen_name,transfer_learning,model_cell_type, data_cell_type)
+
+        else:
+            print('wrong cell line name')
+
+    scatter_plot(final_df, 'overall_pred', 'overall_true', data_name, 'all', True,screen_name)
+    scatter_plot(wild_df, 'overall_pred', 'overall_true', data_name, 'wild', in_vivo, screen_name)
+    scatter_plot(proportion_df, 'true_score', 'pred_score', data_name, 'non-wild_renormalized',in_vivo, screen_name)
+
+
+
+if __name__ == "__main__":
+    args, _ = cmd_opt.parse_known_args()
+    res_desc = main(args)
+    

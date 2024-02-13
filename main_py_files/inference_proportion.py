@@ -7,6 +7,7 @@ import argparse
 import pandas as pd
 import torch
 from torch import nn
+from configparser import ConfigParser
 curr_pth = os.path.abspath('../')
 sys.path.append(curr_pth)
 from proportion_model.src.run_workflow import build_config_map
@@ -23,6 +24,7 @@ cmd_opt.add_argument('-model_cell_name',type=str,default = '',help = 'model cell
 cmd_opt.add_argument('-cell_name',type=str,default ='',help = 'name of the cell')
 cmd_opt.add_argument('-data_name',  type=str,default = '', help = 'directory of the data')
 cmd_opt.add_argument('-saved_model',  type=str,default = '', help = 'name of the model used for inference')
+cmd_opt.add_argument('-config_file', type=str, default='config_file.ini', help='')
 args, _ = cmd_opt.parse_known_args()
 
 
@@ -33,6 +35,7 @@ def proportion_inference(args):
     config.read(args.config_file)
 
     if 'Inference_proportiona_model' in config:
+        print('we are here, inference param')
         params = config['Inference_proportiona_model']
         
         args.data_invivo = config.getboolean('Inference_proportiona_model', 'data_invivo')
@@ -42,6 +45,7 @@ def proportion_inference(args):
         args.model_cell_name = params['model_cell_name']
         args.data_cell_name = params['data_cell_name']
         args.data_name = params['data_name']
+        args.saved_model = params['saved_model']
 
         print('we are printing out args', args)
 

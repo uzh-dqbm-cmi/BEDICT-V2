@@ -13,7 +13,8 @@ def run_inference_script(script, config_file):
 # Specify the paths to your inference scripts
 inference_scripts = [
     {"script": "./inference_absolute_efficiency.py", "config": "config_file.ini"},
-    {"script": "./inference_proportion.py", "config": "config_file.ini"},
+    #{"script": "./inference_proportion.py", "config": "config_file.ini"},
+    {"script": "./overall_outcome_inference.py", "config": "config_file.ini"},
 ]
 
 # Run scripts sequentially
