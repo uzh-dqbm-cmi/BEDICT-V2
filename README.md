@@ -65,6 +65,11 @@ conda create --name bedict_v2
 # Activate the virtual environment
 conda activate bedict_v2
 
+# install python
+conda install -c anaconda python=3.12
+
+conda install pytorch torchvision cudatoolkit=10.1 -c pytorch
+
 # Install dependencies
 pip install -r requirements.txt
 
