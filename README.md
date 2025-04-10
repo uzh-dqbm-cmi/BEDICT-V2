@@ -120,3 +120,6 @@ Go to the foler main_py_files and call inference.py file, before that, you can s
 2.  **Infer the model:**
 
 Go to the foler main_py_files and call inference.py file, before that, you can select the method (in vivo or in vitro), editor in the config file and run inference.py
+
+## License
+[License](LICENSE)
