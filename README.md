@@ -126,33 +126,29 @@ The easiest way to use BEDICT-V2 is through our [web app](https://go.bedict.app/
 Pre-trained models are already included in the repository under corresponding folders, such as BEDICT-V2/absolute_efficiency_model/output/...
 
 
+## Train the Model on Your Own Dataset
 
-## Train the model on your own dataset
+To deploy BEDICT-V2 on your own dataset (e.g., screening data), follow the steps below:
 
-To deploy our model on your dataset, where you will train our model on your screening data, follow these steps:
 ---
 
-1. **Prepare the data:**
+### 1. **Prepare the Data**
 
-There is an example data you will find in the dataset store in exel file, where it includes columsn with target protospacer (20 bases), pam information (four bases), and outcome sequence (20 bases)
+An example dataset is provided in the `dataset/` folder. Your dataset should be in Excel format and include the following columns:
 
-2.  **Pre-process the data:**
+- **Target protospacer** (20 bases)
+- **PAM sequence** (4 bases)
+- **Outcome sequence** (20 bases)
 
-Go to the foler main_py_files and run generate_two_stage_model_data, input the exel file name
+---
+
+### 2. **Pre-process the Data**
+
+Use the preprocessing script to convert your Excel input into model-ready formats:
 
 ```bash
-python inference.py
+python main_py_files/generate_two_stage_model_data.py
 ```
-
-2.  **Train the model:**
-
-Go to the foler main_py_files and call inference.py file, before that, you can select the method (in vivo or in vitro), editor in the config file and run inference.py
-
-
-
-2.  **Infer the model:**
-
-Go to the foler main_py_files and call inference.py file, before that, you can select the method (in vivo or in vitro), editor in the config file and run inference.py
 
 ## License
 [License](LICENSE)
