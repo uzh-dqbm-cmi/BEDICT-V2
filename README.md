@@ -76,10 +76,9 @@ pip install -r requirements.txt
 
 ```
 
-In the above example, the first three backticks start the code block, and the closing three backticks indicate the end of the code block. The text after the closing backticks is back to normal text.
 ## Usage
 
-### Try the Model on Your Own Sequence
+## How to Run Inference on Custom Sequences
 
 To use the pre-trained model on your own DNA sequence, follow these steps:
 
@@ -89,7 +88,6 @@ To use the pre-trained model on your own DNA sequence, follow these steps:
 2. **Get the trained model**
    Trained model is already placed in the corresponding folders, such as (BEDICT-V2/absolute_efficiency_model/output/CNN_v2/ABE8e-NG/protospacer_PAM/train_val) 
 
-## How to Run Inference on Custom Sequences
 
 ### 🧪 Option 1: Use the Notebook (Local Inference)
 
