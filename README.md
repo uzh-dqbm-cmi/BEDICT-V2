@@ -150,5 +150,29 @@ Use the preprocessing script to convert your Excel input into model-ready format
 python main_py_files/generate_two_stage_model_data.py
 ```
 
+### 3. Train the Model
+
+Navigate to the `main_py_files/` directory and run:
+
+```bash
+python train.py
+```
+This will run both the **absolute efficiency model** and the **proportional model**.  
+If needed, you can also run them separately using:
+
+- `Absolute_efficiency_main.py` for the absolute efficiency model
+- `trainval_test_proportions_main.py` for the proportional model
+
+> **Note:**  
+> Before training, be sure to specify the appropriate **editor** (e.g., `ABE8e-NG`) and whether you're working with **in vivo** or **in vitro** conditions in the configuration file.
+
+### 4. Infer the Model**
+
+Once the model is trained, navigate to the `main_py_files/` directory and run the inference script:
+
+```bash
+python inference.py
+```
+
 ## License
 [License](LICENSE)
