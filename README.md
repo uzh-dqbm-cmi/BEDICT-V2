@@ -78,38 +78,54 @@ pip install -r requirements.txt
 
 ## Usage
 
-## How to Run Inference on Custom Sequences
+## Usage
 
-To use the pre-trained model on your own DNA sequence, follow these steps:
+### Run Inference on Custom Sequences
 
-1. **Install Dependencies:**
-   Make sure you have the required dependencies installed. If you haven't done so, refer to the [Environment Setup](#environme:wq!nt-setup) section.
-
-2. **Get the trained model**
-   Trained model is already placed in the corresponding folders, such as (BEDICT-V2/absolute_efficiency_model/output/CNN_v2/ABE8e-NG/protospacer_PAM/train_val) 
-
-
-### 🧪 Option 1: Use the Notebook (Local Inference)
-
-1. Place the Excel file containing:
-   - **Target sequences** (20 bases long)
-   - **PAM sequences** (4 bases long)  
-   in the `dataset/` folder.
-
-2. Navigate to the `notebook/` directory and open the notebook named `Inference_user_defined_sequence.ipynb`.
-
-3. Inside the notebook, you can specify:
-   - The **data file name**
-   - The **editor name**
-   - Whether you want to predict **in vivo** or **in vitro**
-
-4. The notebook will generate predictions using both the **absolute efficiency model** and the **proportional model**, and produce the **final merged results** automatically.
+You can use the pre-trained BEDICT-V2 models to run inference on your own DNA sequences. Choose between running locally via a notebook or using our web app.
 
 ---
 
-### 🌐 Option 2: Try It Online (Easiest)
+### 🧪 Option 1: Local Inference Using the Notebook
 
-You can also use our [web app](https://go.bedict.app/) for a quick and user-friendly experience — no setup required!
+1. **Prepare your input file:**
+
+   - Create an Excel file with:
+     - **Target sequences** (20 bases long)
+     - **PAM sequences** (4 bases long)
+   - Place this file in the `dataset/` directory.
+
+2. **Open the notebook:**
+
+   Navigate to the `notebooks/` folder and open `Inference_user_defined_sequence.ipynb`.
+
+3. **Configure your run:**
+
+   In the notebook, specify:
+   - The **input Excel file name**
+   - The **editor name** (e.g., ABE8e-NG)
+   - Whether you're predicting **in vivo** or **in vitro**
+
+4. **Run inference:**
+
+   The notebook will automatically run:
+   - The **absolute efficiency model**
+   - The **proportional model**
+
+   It will then merge the predictions into a final result table.
+
+---
+
+### 🌐 Option 2: Use the Web App (Easiest)
+
+The easiest way to use BEDICT-V2 is through our [web app](https://go.bedict.app/). Just upload your sequences and get results instantly — no setup required!
+
+---
+
+### 📦 Note on Pre-trained Models
+
+Pre-trained models are already included in the repository under corresponding folders, such as BEDICT-V2/absolute_efficiency_model/output/...
+
 
 
 ### Train the model on your own dataset
