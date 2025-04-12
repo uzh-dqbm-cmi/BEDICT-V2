@@ -89,9 +89,29 @@ To use the pre-trained model on your own DNA sequence, follow these steps:
 2. **Get the trained model**
    Trained model is already placed in the corresponding folders, such as (BEDICT-V2/absolute_efficiency_model/output/CNN_v2/ABE8e-NG/protospacer_PAM/train_val) 
 
-3.  **Do inference**
-Place the exel file that includes target sequences (length 20) and PAM (length 4) under the folder dataset
-Go to the foler notebook file, and run the notebook named Inference_user_defined_sequence.ipynb, there you can sepecify the data name and editor name as well as do you want to predict in vivo or vitrue, then the notebook will help you generate all the outcomes from absolute efficiency model as well as the propertinal model and the final results that are merged. 
+## How to Run Inference on Custom Sequences
+
+### 🧪 Option 1: Use the Notebook (Local Inference)
+
+1. Place the Excel file containing:
+   - **Target sequences** (20 bases long)
+   - **PAM sequences** (4 bases long)  
+   in the `dataset/` folder.
+
+2. Navigate to the `notebook/` directory and open the notebook named `Inference_user_defined_sequence.ipynb`.
+
+3. Inside the notebook, you can specify:
+   - The **data file name**
+   - The **editor name**
+   - Whether you want to predict **in vivo** or **in vitro**
+
+4. The notebook will generate predictions using both the **absolute efficiency model** and the **proportional model**, and produce the **final merged results** automatically.
+
+---
+
+### 🌐 Option 2: Try It Online (Easiest)
+
+You can also use our [web app](https://go.bedict.app/) for a quick and user-friendly experience — no setup required!
 
 
 ### Train the model on your own dataset
