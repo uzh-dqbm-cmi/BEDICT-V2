@@ -78,7 +78,6 @@ pip install -r requirements.txt
 
 ## Usage
 
-## Usage
 
 ### Run Inference on Custom Sequences
 
@@ -114,13 +113,13 @@ You can use the pre-trained BEDICT-V2 models to run inference on your own DNA se
 
    It will then merge the predictions into a final result table.
 
----
+
 
 ### 🌐 Option 2: Use the Web App (Easiest)
 
 The easiest way to use BEDICT-V2 is through our [web app](https://go.bedict.app/). Just upload your sequences and get results instantly — no setup required!
 
----
+
 
 ### 📦 Note on Pre-trained Models
 
