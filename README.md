@@ -86,14 +86,12 @@ To use the pre-trained model on your own DNA sequence, follow these steps:
    Make sure you have the required dependencies installed. If you haven't done so, refer to the [Environment Setup](#environme:wq!nt-setup) section.
 
 2. **Get the trained model**
-   Download the pretrained model and place it in the right folder
+   Trained model is already placed in the corresponding folders, such as (BEDICT-V2/absolute_efficiency_model/output/CNN_v2/ABE8e-NG/protospacer_PAM/train_val) 
 
 3.  **Do inference**
+Place the exel file that includes target sequences (length 20) and PAM (length 4) under the folder dataset
+Go to the foler notebook file, and run the notebook named Inference_user_defined_sequence.ipynb, there you can sepecify the data name and editor name as well as do you want to predict in vivo or vitrue, then the notebook will help you generate all the outcomes from absolute efficiency model as well as the propertinal model and the final results that are merged. 
 
-Go to the foler main_py_files and call inference.py file, before that, you can select the method (in vivo or in vitro), editor in the config file and run inference.py
-```bash
-python inference.py
-```
 
 ### Train the model on your own dataset
 
