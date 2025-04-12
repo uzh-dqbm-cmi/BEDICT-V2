@@ -1,6 +1,6 @@
 # Ignore build directories
 
-
+.ipynb_checkpoints
 # Ignore all .pyc files
 *.pyc
 # Ignore all __pycache__ directories
