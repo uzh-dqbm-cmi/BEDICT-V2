@@ -128,9 +128,10 @@ Pre-trained models are already included in the repository under corresponding fo
 
 
 
-### Train the model on your own dataset
+## Train the model on your own dataset
 
 To deploy our model on your dataset, where you will train our model on your screening data, follow these steps:
+---
 
 1. **Prepare the data:**
 
